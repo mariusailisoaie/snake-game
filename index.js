@@ -1,5 +1,5 @@
 const canvasBorderColor = '#F22613';
-const canvasBackgroundColor = '#264348';
+const canvasBackgroundColor = '#95A5A6';
 const snakeColor = '#006442';
 const snakeBorderColor = '#000';
 
