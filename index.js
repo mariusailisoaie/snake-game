@@ -51,13 +51,13 @@ const snakeMove = () => {
   drawingContext.strokeRect(head.x, head.y, 20, 20);
   
   if (head.x === 800) {
-    head.x = 0;
+    head.x = -20;
   } else if(head.x === -20) {
-    head.x = 800;
+    head.x = 780;
   } else if(head.y === 800) {
-    head.y = 0;
+    head.y = -20;
   } else if(head.y === -20) {
-    head.y = 800;
+    head.y = 780;
   }
 
   snake.unshift(head);
