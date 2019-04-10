@@ -39,7 +39,7 @@ const drawSnakePart = snakePart => {
 
 const drawSnake = () => {
   snake.forEach(snakePart => {
-    // console.log(snakePart);
+    console.log(snakePart);
     drawSnakePart(snakePart);
   });
 };
