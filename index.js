@@ -3,6 +3,9 @@ const canvasBackgroundColor = '#95A5A6';
 const snakeColor = '#006442';
 const snakeBorderColor = '#000';
 
+let dx = 20;
+let dy = 0;
+
 const canvas = document.getElementById('canvas');
 const drawingContext = canvas.getContext('2d');
 
@@ -38,21 +41,42 @@ const drawSnake = () => {
   });
 };
 
-const snakeMove = (dx, dy) => {
+const snakeMove = () => {
   const head = { x: snake[0].x + dx, y: snake[0].y + dy }
 
   drawingContext.fillStyle = '#CA6924';
   drawingContext.strokestyle = 'black';
   
-  drawingContext.fillRect(head.x - 20, head.y, 20, 20);
-  drawingContext.strokeRect(head.x - 20, head.y, 20, 20);
+  drawingContext.fillRect(head.x, head.y, 20, 20);
+  drawingContext.strokeRect(head.x, head.y, 20, 20);
   
   snake.unshift(head);
   snake.pop();
 }
 
+const arrowKeyPressed = (key) => {
+  if (key === 'ArrowUp') {
+    dx = 0;
+    dy = -20;
+  } else if(key === 'ArrowDown') {
+    dx = 0;
+    dy = 20;
+  } else if(key === 'ArrowRight') {
+    dx = 20;
+    dy = 0;
+  } else if(key === 'ArrowLeft') {
+    dx = -20;
+    dy = 0;
+  }
+}
+
+document.addEventListener('keydown', e => {
+  console.log(e);
+  arrowKeyPressed(e.key)
+});
+
 setInterval(() => {
   paintCanvas();
   drawSnake();
-  snakeMove(20, 0);
-}, 500);
+  snakeMove();
+}, 100);
