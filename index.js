@@ -6,15 +6,21 @@ const snakeBorderColor = '#000';
 const canvas = document.getElementById('canvas');
 const drawingContext = canvas.getContext('2d');
 
-drawingContext.fillStyle = canvasBackgroundColor;
-drawingContext.strokestyle = canvasBorderColor;
-drawingContext.fillRect(0, 0, canvas.width, canvas.height);
-drawingContext.strokeRect(0, 0, canvas.width, canvas.height);
+const paintCanvas = () => {
+  drawingContext.fillStyle = canvasBackgroundColor;
+  drawingContext.strokestyle = canvasBorderColor;
+  drawingContext.fillRect(0, 0, canvas.width, canvas.height);
+  drawingContext.strokeRect(0, 0, canvas.width, canvas.height);
+}
+
+paintCanvas();
 
 let snake = [
   { x: 400, y: 400 },
   { x: 380, y: 400 },
   { x: 360, y: 400 },
+  { x: 340, y: 400 },
+  { x: 320, y: 400 },
 ]
 
 const drawSnakePart = snakePart => {
@@ -25,9 +31,24 @@ const drawSnakePart = snakePart => {
   drawingContext.strokeRect(snakePart.x, snakePart.y, 20, 20);
 }
 
-const drawSnake = (() => {
+const drawSnake = () => {
   snake.forEach(snakePart => {
-    console.log(snakePart);
+    // console.log(snakePart);
     drawSnakePart(snakePart);
   });
-})();
+};
+
+const snakeMove = (dx, dy) => {
+  const head = { x: snake[0].x + dx, y: snake[0].y + dy }
+
+  snake.unshift(head);
+  snake.pop();
+}
+
+drawSnake();
+
+setInterval(() => {
+  paintCanvas();
+  drawSnake();
+  snakeMove(20, 0);
+}, 500);
