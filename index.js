@@ -41,11 +41,15 @@ const drawSnake = () => {
 const snakeMove = (dx, dy) => {
   const head = { x: snake[0].x + dx, y: snake[0].y + dy }
 
+  drawingContext.fillStyle = '#CA6924';
+  drawingContext.strokestyle = 'black';
+  
+  drawingContext.fillRect(head.x - 20, head.y, 20, 20);
+  drawingContext.strokeRect(head.x - 20, head.y, 20, 20);
+  
   snake.unshift(head);
   snake.pop();
 }
-
-drawSnake();
 
 setInterval(() => {
   paintCanvas();
