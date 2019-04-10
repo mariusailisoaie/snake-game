@@ -24,6 +24,9 @@ let snake = [
   { x: 360, y: 400 },
   { x: 340, y: 400 },
   { x: 320, y: 400 },
+  { x: 300, y: 400 },
+  { x: 280, y: 400 },
+  { x: 260, y: 400 },
 ]
 
 const drawSnakePart = snakePart => {
@@ -60,6 +63,14 @@ const snakeMove = () => {
     head.y = 780;
   }
 
+  console.log(snake);
+  
+  snake.forEach(square => {
+    if (head.x === square.x - 20) {
+      snake = [];
+    }
+  })
+
   snake.unshift(head);
   snake.pop();
 }
@@ -89,4 +100,4 @@ setInterval(() => {
   paintCanvas();
   drawSnake();
   snakeMove();
-}, 200);
+}, 1000);
