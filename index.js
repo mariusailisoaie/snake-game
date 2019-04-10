@@ -49,7 +49,7 @@ const snakeMove = () => {
   
   drawingContext.fillRect(head.x, head.y, 20, 20);
   drawingContext.strokeRect(head.x, head.y, 20, 20);
-  
+
   if (head.x === 800) {
     head.x = -20;
   } else if(head.x === -20) {
@@ -65,23 +65,23 @@ const snakeMove = () => {
 }
 
 const arrowKeyPressed = (key) => {
-  if (key === 'ArrowUp') {
+  if (key === 'ArrowUp' && dy !== 20) {
     dx = 0;
     dy = -20;
-  } else if(key === 'ArrowDown') {
+  } else if(key === 'ArrowDown' && dy !== -20) {
     dx = 0;
     dy = 20;
-  } else if(key === 'ArrowRight') {
+  } else if(key === 'ArrowRight' && dx !== -20) {
     dx = 20;
     dy = 0;
-  } else if(key === 'ArrowLeft') {
+  } else if(key === 'ArrowLeft' && dx !== 20) {
     dx = -20;
     dy = 0;
   }
 }
 
 document.addEventListener('keydown', e => {
-  console.log(e);
+  console.log(e.key);
   arrowKeyPressed(e.key)
 });
 
@@ -89,4 +89,4 @@ setInterval(() => {
   paintCanvas();
   drawSnake();
   snakeMove();
-}, 50);
+}, 200);
