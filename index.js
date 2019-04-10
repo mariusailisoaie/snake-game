@@ -50,6 +50,16 @@ const snakeMove = () => {
   drawingContext.fillRect(head.x, head.y, 20, 20);
   drawingContext.strokeRect(head.x, head.y, 20, 20);
   
+  if (head.x === 800) {
+    head.x = 0;
+  } else if(head.x === -20) {
+    head.x = 800;
+  } else if(head.y === 800) {
+    head.y = 0;
+  } else if(head.y === -20) {
+    head.y = 800;
+  }
+
   snake.unshift(head);
   snake.pop();
 }
@@ -79,4 +89,4 @@ setInterval(() => {
   paintCanvas();
   drawSnake();
   snakeMove();
-}, 100);
+}, 50);
