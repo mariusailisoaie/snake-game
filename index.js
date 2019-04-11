@@ -19,14 +19,10 @@ const paintCanvas = () => {
 paintCanvas();
 
 let snake = [
-  { x: 400, y: 400 },
-  { x: 380, y: 400 },
-  { x: 360, y: 400 },
-  { x: 340, y: 400 },
-  { x: 320, y: 400 },
-  { x: 300, y: 400 },
-  { x: 280, y: 400 },
-  { x: 260, y: 400 },
+  { x: 200, y: 200 },
+  { x: 180, y: 200 },
+  { x: 160, y: 200 },
+  { x: 140, y: 200 },
 ]
 
 const drawSnakePart = snakePart => {
