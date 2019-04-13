@@ -40,17 +40,21 @@ const drawSnake = () => {
 let foodX = Math.floor(Math.random() * 19 + 1) * 20;
 let foodY = Math.floor(Math.random() * 19 + 1) * 20;
 
+const drawSnakeTongue = () => {
+  let tongue = { x: snake[0].x, y: snake[0].y}
+  drawingContext.fillStyle = '#344724';
+  drawingContext.fillRect(tongue.x + (dx > 0 ? dx : -5), tongue.y + dy, 5, 20);
+}
+
 const drawFood = () => {
   drawingContext.fillStyle = foodColor;
   drawingContext.strokestyle = borderColor;
 
   drawingContext.fillRect(foodX, foodY, 20, 20);
-  drawingContext.strokeRect(foodX, foodY, 20, 20);
 }
 
 const snakeMove = () => {
   const head = { x: snake[0].x + dx, y: snake[0].y + dy }
-
   console.log(head);
 
   if (head.x === 400) {
@@ -74,6 +78,7 @@ const snakeMove = () => {
 
 paintCanvas();
 drawSnake();
+drawSnakeTongue();
 drawFood();
 
 const arrowKeyPressed = key => {
@@ -93,21 +98,19 @@ const arrowKeyPressed = key => {
     snakeMove();
     paintCanvas();
     drawSnake();
+    drawSnakeTongue();
     drawFood();
   }
 }
 
 document.addEventListener('keydown', e => {
-  if(e.key === 'w') {
-    paintCanvas();
-    drawSnake();
-  }
   arrowKeyPressed(e.key);
 });
 
 // setInterval(() => {
-//     snakeMove();
+//   snakeMove();
 //   paintCanvas();
 //   drawSnake();
+//   drawSnakeTongue();
 //   drawFood();
-// }, 500);
+// }, 400);
