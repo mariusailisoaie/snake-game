@@ -9,10 +9,10 @@ const drawingContext = canvas.getContext('2d');
 let dx = 20, dy = 0;
 
 let snake = [
-  { x: 200, y: 0 },
-  { x: 180, y: 0 },
-  { x: 160, y: 0 },
-  { x: 140, y: 0 },
+  { x: 200, y: 200 },
+  { x: 180, y: 200 },
+  { x: 160, y: 200 },
+  { x: 140, y: 200 },
 ]
 
 const paintCanvas = () => {
