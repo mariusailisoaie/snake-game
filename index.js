@@ -1,7 +1,8 @@
 const canvasBorderColor = '#F22613';
 const canvasBackgroundColor = '#95A5A6';
 const snakeColor = '#006442';
-const snakeBorderColor = '#000';
+const borderColor = '#000';
+const foodColor = '#513814';
 
 const canvas = document.getElementById('canvas');
 const drawingContext = canvas.getContext('2d');
@@ -24,7 +25,7 @@ const paintCanvas = () => {
 
 const drawSnakePart = snakePart => {
   drawingContext.fillStyle = snakeColor;
-  drawingContext.strokestyle = snakeBorderColor;
+  drawingContext.strokestyle = borderColor;
   
   drawingContext.fillRect(snakePart.x - 20, snakePart.y, 20, 20);
   drawingContext.strokeRect(snakePart.x - 20, snakePart.y, 20, 20);
@@ -36,10 +37,21 @@ const drawSnake = () => {
   });
 };
 
+const drawFood = () => {
+  let foodX = Math.floor(Math.random() * 19 + 1) * 20;
+  let foodY = Math.floor(Math.random() * 19 + 1) * 20;
+  
+  drawingContext.fillStyle = foodColor;
+  drawingContext.strokestyle = borderColor;
+
+  drawingContext.fillRect(foodX, foodY, 20, 20);
+  drawingContext.strokeRect(foodX, foodY, 20, 20);
+}
+
 const snakeMove = () => {
   const head = { x: snake[0].x + dx, y: snake[0].y + dy }
 	// console.log('log: snakeMove -> head', head);
-	console.log('log: snakeMove -> snake[0].x', { x: snake[0].x, y: snake[0].y });
+	console.log('log: snakeMove -> snake', { x: snake[0].x, y: snake[0].y });
 
   if (head.x === 420) {
     head.x = 20;
@@ -56,6 +68,7 @@ const snakeMove = () => {
 }
 
 paintCanvas();
+drawFood();
 drawSnake();
 snakeMove();
 
@@ -87,4 +100,4 @@ document.addEventListener('keydown', e => {
 //   paintCanvas();
 //   drawSnake();
 //   snakeMove();
-// }, 100);
+// }, 1000);
