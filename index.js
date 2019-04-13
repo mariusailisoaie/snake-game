@@ -51,8 +51,10 @@ const drawFood = () => {
 const snakeMove = () => {
   const head = { x: snake[0].x + dx, y: snake[0].y + dy }
 	// console.log('log: snakeMove -> head', head);
-	// console.log('log: snakeMove -> snake', { x: snake[0].x, y: snake[0].y });
-
+  // console.log('log: snakeMove -> snake', { x: snake[0].x, y: snake[0].y });
+  // console.log('log: snakeMove -> food', foodX, foodY);
+  // console.log('\n');
+  
   if (head.x === 420) {
     head.x = 20;
   } else if(head.x === 0) {
@@ -62,14 +64,23 @@ const snakeMove = () => {
   } else if(head.y === -20) {
     head.y = 380;
   }
-
+  
   snake.unshift(head);
   snake.pop();
+
+  if (head.x === foodX && head.y === foodY) {
+    drawFood();
+		console.log('log: snakeMove -> drawFood()');
+  }
+  // console.log('\n');
+  // console.log('log: snakeMove -> snake', { x: snake[0].x, y: snake[0].y });
+  // console.log('log: snakeMove -> head', head);
+  // console.log('\n');
 }
 
 paintCanvas();
-drawFood();
 drawSnake();
+drawFood();
 snakeMove();
 
 const arrowKeyPressed = key => {
@@ -88,17 +99,23 @@ const arrowKeyPressed = key => {
   } else if(key === 'q'){
     paintCanvas();
     drawSnake();
+    drawFood();
     snakeMove();
   }
 }
 
 document.addEventListener('keydown', e => {
-  arrowKeyPressed(e.key)
+  console.log({x: snake[0].x, y: snake[0].y});
+  if(e.key === 'w') {
+    paintCanvas();
+    drawSnake();
+  }
+  arrowKeyPressed(e.key);
 });
 
-setInterval(() => {
-  paintCanvas();
-  drawSnake();
-  drawFood();
-  snakeMove();
-}, 100);
+// setInterval(() => {
+//   paintCanvas();
+//   drawSnake();
+//   drawFood();
+//   snakeMove();
+// }, 100);
