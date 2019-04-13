@@ -10,10 +10,10 @@ const drawingContext = canvas.getContext('2d');
 let dx = 20, dy = 0;
 
 let snake = [
-  { x: 200, y: 200 },
   { x: 180, y: 200 },
   { x: 160, y: 200 },
   { x: 140, y: 200 },
+  { x: 120, y: 200 },
 ]
 
 const paintCanvas = () => {
@@ -27,8 +27,8 @@ const drawSnakePart = snakePart => {
   drawingContext.fillStyle = snakeColor;
   drawingContext.strokestyle = borderColor;
   
-  drawingContext.fillRect(snakePart.x - 20, snakePart.y, 20, 20);
-  drawingContext.strokeRect(snakePart.x - 20, snakePart.y, 20, 20);
+  drawingContext.fillRect(snakePart.x, snakePart.y, 20, 20);
+  drawingContext.strokeRect(snakePart.x, snakePart.y, 20, 20);
 }
 
 const drawSnake = () => {
@@ -50,15 +50,13 @@ const drawFood = () => {
 
 const snakeMove = () => {
   const head = { x: snake[0].x + dx, y: snake[0].y + dy }
-	// console.log('log: snakeMove -> head', head);
-  // console.log('log: snakeMove -> snake', { x: snake[0].x, y: snake[0].y });
-  // console.log('log: snakeMove -> food', foodX, foodY);
-  // console.log('\n');
-  
-  if (head.x === 420) {
-    head.x = 20;
-  } else if(head.x === 0) {
-    head.x = 400;
+
+  console.log(head);
+
+  if (head.x === 400) {
+    head.x = 0;
+  } else if(head.x === -20) {
+    head.x = 380;
   } else if(head.y === 400) {
     head.y = 0;
   } else if(head.y === -20) {
@@ -68,20 +66,15 @@ const snakeMove = () => {
   snake.unshift(head);
   snake.pop();
 
-  if (head.x === foodX && head.y === foodY) {
-    drawFood();
-		console.log('log: snakeMove -> drawFood()');
-  }
-  // console.log('\n');
-  // console.log('log: snakeMove -> snake', { x: snake[0].x, y: snake[0].y });
-  // console.log('log: snakeMove -> head', head);
-  // console.log('\n');
+  // if (head.x === foodX && head.y === foodY) {
+  //   drawFood();
+	// 	console.log('log: snakeMove -> drawFood()');
+  // }
 }
 
 paintCanvas();
 drawSnake();
 drawFood();
-snakeMove();
 
 const arrowKeyPressed = key => {
   if (key === 'ArrowUp' && dy !== 20) {
@@ -97,15 +90,14 @@ const arrowKeyPressed = key => {
     dx = -20;
     dy = 0;
   } else if(key === 'q'){
+    snakeMove();
     paintCanvas();
     drawSnake();
     drawFood();
-    snakeMove();
   }
 }
 
 document.addEventListener('keydown', e => {
-  console.log({x: snake[0].x, y: snake[0].y});
   if(e.key === 'w') {
     paintCanvas();
     drawSnake();
@@ -114,8 +106,8 @@ document.addEventListener('keydown', e => {
 });
 
 // setInterval(() => {
+//     snakeMove();
 //   paintCanvas();
 //   drawSnake();
 //   drawFood();
-//   snakeMove();
-// }, 100);
+// }, 500);
