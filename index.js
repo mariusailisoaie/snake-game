@@ -37,10 +37,10 @@ const drawSnake = () => {
   });
 };
 
+let foodX = Math.floor(Math.random() * 19 + 1) * 20;
+let foodY = Math.floor(Math.random() * 19 + 1) * 20;
+
 const drawFood = () => {
-  let foodX = Math.floor(Math.random() * 19 + 1) * 20;
-  let foodY = Math.floor(Math.random() * 19 + 1) * 20;
-  
   drawingContext.fillStyle = foodColor;
   drawingContext.strokestyle = borderColor;
 
@@ -51,7 +51,7 @@ const drawFood = () => {
 const snakeMove = () => {
   const head = { x: snake[0].x + dx, y: snake[0].y + dy }
 	// console.log('log: snakeMove -> head', head);
-	console.log('log: snakeMove -> snake', { x: snake[0].x, y: snake[0].y });
+	// console.log('log: snakeMove -> snake', { x: snake[0].x, y: snake[0].y });
 
   if (head.x === 420) {
     head.x = 20;
@@ -96,8 +96,9 @@ document.addEventListener('keydown', e => {
   arrowKeyPressed(e.key)
 });
 
-// setInterval(() => {
-//   paintCanvas();
-//   drawSnake();
-//   snakeMove();
-// }, 1000);
+setInterval(() => {
+  paintCanvas();
+  drawSnake();
+  drawFood();
+  snakeMove();
+}, 100);
