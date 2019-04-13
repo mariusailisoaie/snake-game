@@ -43,7 +43,13 @@ let foodY = Math.floor(Math.random() * 19 + 1) * 20;
 const drawSnakeTongue = () => {
   let tongue = { x: snake[0].x, y: snake[0].y}
   drawingContext.fillStyle = '#344724';
-  drawingContext.fillRect(tongue.x + (dx > 0 ? dx : -5), tongue.y + dy, 5, 20);
+
+  drawingContext.fillRect(
+    tongue.x + (dx > 0 ? dx : (dy === 0 ? -5 : 0)),
+    tongue.y + (dy < 0 ? -5 : (dx < 0 || dx > 0 ? 0 : 20)),
+    (dx > 0 || dx < 0 ? 5 : 20),
+    (dy < 0 || dy > 0 ? 5 : 20)
+  );
 }
 
 const drawFood = () => {
