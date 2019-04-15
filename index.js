@@ -53,8 +53,8 @@ const drawSnakeTongue = () => {
   );
 }
 
-let foodX = Math.floor(Math.random() * 19 + 1) * 20;
-let foodY = Math.floor(Math.random() * 19 + 1) * 20;
+let foodX = Math.floor(Math.random() * 20) * 20;
+let foodY = Math.floor(Math.random() * 20) * 20;
 
 const drawFood = (foodXAxis = foodX, foodYAxis = foodY) => {
   drawingContext.fillStyle = foodColor;
@@ -71,7 +71,7 @@ const snakeMove = () => {
 
   if (head.x === foodX && head.y === foodY) {
     snake.push({ foodX, foodY });
-    drawFood(Math.floor(Math.random() * 19 + 1) * 20, Math.floor(Math.random() * 19 + 1) * 20);
+    drawFood(Math.floor(Math.random() * 20) * 20, Math.floor(Math.random() * 20) * 20);
     score++;
     scoreElement.innerHTML = `Score: ${score}`;
   }
@@ -108,7 +108,7 @@ const arrowKeyPressed = key => {
     paintCanvas();
     drawSnake();
     drawSnakeTongue();
-    drawFood();
+    drawFood(Math.floor(Math.random() * 20) * 20, Math.floor(Math.random() * 20) * 20);
   }
 }
 
