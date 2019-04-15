@@ -86,7 +86,14 @@ const snakeMove = () => {
     if (head.x === snakePart.x && head.y === snakePart.y) {
       if(snake.length > 3) {
         console.log('Game Over!');
+        // Reset snake length to 3
         snake = snake.splice(0, 3);
+        
+        // Reset snake position to initial position
+        head.x = 180;
+        head.y = 200;
+        dx = 20;
+        dy = 0;
       }
       score = 0;
     }
