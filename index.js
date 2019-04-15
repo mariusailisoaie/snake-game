@@ -13,6 +13,7 @@ let dx = 20, dy = 0, score = 0;
 
 scoreElement.innerHTML = `Score: ${score}`;
 
+// Initial snake length
 let snake = [
   { x: 180, y: 200 },
   { x: 160, y: 200 },
@@ -27,6 +28,7 @@ const paintCanvas = () => {
   drawingContext.strokeRect(0, 0, canvas.width, canvas.height);
 }
 
+// Function that draws each snake part in the snake array
 const drawSnakePart = snakePart => {
   drawingContext.fillStyle = snakeColor;
   drawingContext.strokestyle = borderColor;
@@ -41,6 +43,7 @@ const drawSnake = () => {
   });
 };
 
+// Function that draws a "tongue" for the snake
 const drawSnakeTongue = () => {
   let tongue = { x: snake[0].x, y: snake[0].y}
   drawingContext.fillStyle = '#344724';
@@ -53,6 +56,7 @@ const drawSnakeTongue = () => {
   );
 }
 
+// Initial food coordinates/position
 let foodX = Math.floor(Math.random() * 20) * 20;
 let foodY = Math.floor(Math.random() * 20) * 20;
 
@@ -69,6 +73,7 @@ const drawFood = (foodXAxis = foodX, foodYAxis = foodY) => {
 const snakeMove = () => {
   const head = { x: snake[0].x + dx, y: snake[0].y + dy }
 
+  // Snake ate food logic
   if (head.x === foodX && head.y === foodY) {
     snake.push({ foodX, foodY });
     drawFood(Math.floor(Math.random() * 20) * 20, Math.floor(Math.random() * 20) * 20);
@@ -76,6 +81,7 @@ const snakeMove = () => {
     scoreElement.innerHTML = `Score: ${score}`;
   }
 
+  // Allow snake to walk through walls
   if (head.x === 400) {
     head.x = 0;
   } else if(head.x === -20) {
@@ -90,6 +96,7 @@ const snakeMove = () => {
   snake.pop();
 }
 
+// Function for changinc the snake direction via arrow keys
 const arrowKeyPressed = key => {
   if (key === 'ArrowUp' && dy !== 20) {
     dx = 0;
@@ -103,12 +110,13 @@ const arrowKeyPressed = key => {
   } else if(key === 'ArrowLeft' && dx !== 20) {
     dx = -20;
     dy = 0;
+  // Useful for testing
   } else if(key === 'q'){
     snakeMove();
     paintCanvas();
     drawSnake();
     drawSnakeTongue();
-    drawFood(Math.floor(Math.random() * 20) * 20, Math.floor(Math.random() * 20) * 20);
+    drawFood();
   }
 }
 
@@ -123,10 +131,10 @@ drawSnakeTongue();
 drawFood(foodX, foodY);
 
 // Paint elements every n miliseconds / Update drawing of elements
-setInterval(() => {
-  snakeMove();
-  paintCanvas();
-  drawSnake();
-  drawSnakeTongue();
-  drawFood(foodX, foodY);
-}, 100);
+// setInterval(() => {
+//   snakeMove();
+//   paintCanvas();
+//   drawSnake();
+//   drawSnakeTongue();
+//   drawFood(foodX, foodY);
+// }, 100);
