@@ -7,7 +7,11 @@ const foodColor = '#513814';
 const canvas = document.getElementById('canvas');
 const drawingContext = canvas.getContext('2d');
 
-let dx = 20, dy = 0;
+const scoreElement = document.getElementById('score');
+
+let dx = 20, dy = 0, score = 0;
+
+scoreElement.innerHTML = `Score: ${score}`;
 
 let snake = [
   { x: 180, y: 200 },
@@ -68,6 +72,8 @@ const snakeMove = () => {
   if (head.x === foodX && head.y === foodY) {
     snake.push({ foodX, foodY });
     drawFood(Math.floor(Math.random() * 19 + 1) * 20, Math.floor(Math.random() * 19 + 1) * 20);
+    score++;
+    scoreElement.innerHTML = `Score: ${score}`;
   }
 
   if (head.x === 400) {
@@ -123,4 +129,4 @@ setInterval(() => {
   drawSnake();
   drawSnakeTongue();
   drawFood(foodX, foodY);
-}, 500);
+}, 100);
