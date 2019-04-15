@@ -1,13 +1,27 @@
+// modulus 5
+
 const numbers = [];
 
-for(let i = 0; i < 10; i++) {
+for(let i = 0; i < 100; i++) {
   numbers.push(i + 1);
 }
 
-const spliced = numbers.splice(0, 3);
+// console.log(numbers);
 
-console.log(numbers);
-console.log(spliced);
+numbers.forEach(number => {
+  if(number % 5 === 0) console.log(number);
+});
+
+// const numbers = [];
+
+// for(let i = 0; i < 10; i++) {
+//   numbers.push(i + 1);
+// }
+
+// const spliced = numbers.splice(0, 3);
+
+// console.log(numbers);
+// console.log(spliced);
 
 /* const randomNumbersArr = [];
 
