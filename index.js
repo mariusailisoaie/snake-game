@@ -11,7 +11,6 @@ const scoreElement = document.getElementById('score');
 
 let dx = 20, dy = 0, score = 0;
 
-scoreElement.innerHTML = `Score: ${score}`;
 
 // Initial snake length
 let snake = [
@@ -20,6 +19,7 @@ let snake = [
   { x: 140, y: 200 },
   { x: 120, y: 200 },
 ]
+scoreElement.innerHTML = `Score: ${score}`;
 
 const paintCanvas = () => {
   drawingContext.fillStyle = canvasBackgroundColor;
@@ -78,8 +78,19 @@ const snakeMove = () => {
     snake.push({ foodX, foodY });
     drawFood(Math.floor(Math.random() * 20) * 20, Math.floor(Math.random() * 20) * 20);
     score++;
-    scoreElement.innerHTML = `Score: ${score}`;
   }
+  scoreElement.innerHTML = `Score: ${score}`;
+
+  // Snake bit itself logic
+  snake.forEach(snakePart => {
+    if (head.x === snakePart.x && head.y === snakePart.y) {
+      if(snake.length > 3) {
+        console.log('Game Over!');
+        snake = snake.splice(0, 3);
+      }
+      score = 0;
+    }
+  });
 
   // Allow snake to walk through walls
   if (head.x === 400) {
@@ -131,10 +142,10 @@ drawSnakeTongue();
 drawFood(foodX, foodY);
 
 // Paint elements every n miliseconds / Update drawing of elements
-// setInterval(() => {
-//   snakeMove();
-//   paintCanvas();
-//   drawSnake();
-//   drawSnakeTongue();
-//   drawFood(foodX, foodY);
-// }, 100);
+setInterval(() => {
+  snakeMove();
+  paintCanvas();
+  drawSnake();
+  drawSnakeTongue();
+  drawFood(foodX, foodY);
+}, 100);
