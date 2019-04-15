@@ -9,7 +9,7 @@ const drawingContext = canvas.getContext('2d');
 
 const scoreElement = document.getElementById('score');
 
-let dx = 20, dy = 0, score = 0;
+let dx = 20, dy = 0, score = 0, snakeSpeed = 250;
 
 
 // Initial snake length
@@ -72,6 +72,12 @@ const drawFood = (foodXAxis = foodX, foodYAxis = foodY) => {
 
 const snakeMove = () => {
   const head = { x: snake[0].x + dx, y: snake[0].y + dy }
+
+  // Increase snake speed when it grows
+  if (score !== 0 && score % 5 === 0) {
+    snakeSpeed -= 10;
+  }
+  console.log(snakeSpeed);
 
   // Snake ate food logic
   if (head.x === foodX && head.y === foodY) {
@@ -149,10 +155,16 @@ drawSnakeTongue();
 drawFood(foodX, foodY);
 
 // Paint elements every n miliseconds / Update drawing of elements
-setInterval(() => {
+const callFunctions = () => {
   snakeMove();
   paintCanvas();
   drawSnake();
   drawSnakeTongue();
   drawFood(foodX, foodY);
-}, 100);
+  
+  setTimeout(() => {
+    callFunctions();
+  }, snakeSpeed);
+}
+
+callFunctions();
