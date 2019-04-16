@@ -73,17 +73,16 @@ const drawFood = (foodXAxis = foodX, foodYAxis = foodY) => {
 const snakeMove = () => {
   const head = { x: snake[0].x + dx, y: snake[0].y + dy }
 
-  // Increase snake speed when it grows
-  if (score !== 0 && score % 5 === 0) {
-    snakeSpeed -= 10;
-  }
-  console.log(snakeSpeed);
-
   // Snake ate food logic
   if (head.x === foodX && head.y === foodY) {
     snake.push({ foodX, foodY });
     drawFood(Math.floor(Math.random() * 20) * 20, Math.floor(Math.random() * 20) * 20);
     score++;
+
+    // Increase snake speed when it grows
+    if (score % 5 === 0) {
+      snakeSpeed -= 30;
+    }
   }
   scoreElement.innerHTML = `Score: ${score}`;
 
@@ -102,6 +101,7 @@ const snakeMove = () => {
         dy = 0;
       }
       score = 0;
+      snakeSpeed = 250;
     }
   });
 
